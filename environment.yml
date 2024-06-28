@@ -1,0 +1,18 @@
+name: syconn
+dependencies:
+  - python=2.7
+  - pip
+
+  - cython
+  - numpy
+  - matplotlib
+  - scipy
+  - networkx
+
+  - decorator=4.3.0 # Latest version requires python >= 3.5
+
+  - pip:
+    - scikit-learn == 0.17.1
+    - git+https://github.com/knossos-project/knossos_utils.git@py3-compat # Main branch requires python >= 3
+    - git+https://github.com/ELEKTRONN/ELEKTRONN.git
+    - -e . --global-option="build_ext"
