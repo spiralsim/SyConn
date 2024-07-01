@@ -22,6 +22,13 @@ Installation
 
 Before you can set up SyConn, ensure that the latest version of the conda package manager is installed on your system.
 `Anaconda <https://anaconda.org>`__ with `libmamba <https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community>`__ seems to be the fastest option.
+
+You may also need to install g++:
+
+::
+   
+   sudo apt-get install g++
+
 Then you can install SyConn and all of its dependencies into a new conda
 `environment <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html>`__
 named “syconn2” by running:
