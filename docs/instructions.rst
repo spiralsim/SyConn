@@ -20,9 +20,9 @@ Installation
    - This is required because the dependency `menpo::osmesa <https://anaconda.org/menpo/osmesa>` is currently only available on linux-64.
    - Tested on Ubuntu 22.04.3 LTS
 
-Before you can set up SyConn, ensure that the latest version of `Anaconda <https://anaconda.org/>`__
-package manager is installed on your system. Then you can install SyConn and
-all of its dependencies into a new conda
+Before you can set up SyConn, ensure that the latest version of the conda package manager is installed on your system.
+`Anaconda <https://anaconda.org>`__ with `libmamba <https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community>`__ seems to be the fastest option.
+Then you can install SyConn and all of its dependencies into a new conda
 `environment <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html>`__
 named “syconn2” by running:
 
@@ -30,6 +30,7 @@ named “syconn2” by running:
 
    git clone https://github.com/StructuralNeurobiologyLab/SyConn
    cd SyConn
+   conda config --set solver libmamba # If libmamba isn't already set as default
    conda env create -n syconn2 -f environment.yml
    conda activate syconn2
    pip install -e .
