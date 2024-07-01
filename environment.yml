@@ -13,6 +13,11 @@ dependencies:
 
   - pip:
     - scikit-learn == 0.17.1
-    - git+https://github.com/knossos-project/knossos_utils.git@py3-compat # Main branch requires python >= 3
+    - future # Required for knossos_utils Python 2/3 compatibility
+    - python-snappy == 0.5.1 # Required to write/read overlaycubes and k.zips
+    # Despite being named python3, this branch is also compatible with Python 2.7.
+    # The master branch requires python >= 3.
+    # The py3-compat branch lacks skeleton_utils.py.
+    - git+https://github.com/knossos-project/knossos_utils.git@python3
     - git+https://github.com/ELEKTRONN/ELEKTRONN.git
     - -e . --global-option="build_ext"
