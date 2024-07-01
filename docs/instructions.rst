@@ -16,11 +16,11 @@ More details are linked in the respective chapters.
 Installation
 ------------
 
-- Python 3.7
-- The whole pipeline was designed and tested on Linux systems
+- linux-64 or equivalent OS (ex. WSL)
+   - This is required because the dependency `menpo::osmesa <https://anaconda.org/menpo/osmesa>` is currently only available on linux-64.
+   - Tested on Ubuntu 22.04.3 LTS
 
-Before you can set up SyConn, ensure that the
-`mamba <https://mamba.readthedocs.io/en/latest/mamba-installation.html#mamba-installation>`__
+Before you can set up SyConn, ensure that the latest version of `Anaconda <https://anaconda.org/>`__
 package manager is installed on your system. Then you can install SyConn and
 all of its dependencies into a new conda
 `environment <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html>`__
@@ -30,8 +30,8 @@ named “syconn2” by running:
 
    git clone https://github.com/StructuralNeurobiologyLab/SyConn
    cd SyConn
-   mamba env create -n syconn2 -f environment.yml
-   mamba activate syconn2
+   conda env create -n syconn2 -f environment.yml
+   conda activate syconn2
    pip install -e .
 
 The last command will install SyConn in

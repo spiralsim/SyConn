@@ -18,8 +18,9 @@ dependencies:
   # - pytorch-sparse
 
   # From conda-forge and defaults
-  - python=3.7  # (3.6 should also work)
+  - python >= 3.6 # Setting python=3.7 explicitly may cause the "Solving environment" step to hang
   - pip
+  - setuptools < 70 # setuptools >= 70.0.0 throws "cannot import name 'packaging' from 'pkg_resources'"
   #- gxx_linux-64
   - lemon
   - vigra
@@ -42,7 +43,7 @@ dependencies:
   - scipy < 1.9   # <1.9 because n_jobs parameter in every tree query was removed. Can be >=1.9 if refactored in the whole project
   - termcolor
   # fix version due to stored RFC models.
-  - scikit-learn = 0.21.3
+  - scikit-learn >= 0.24.1
   - scikit-image
   - opencv
   - numba >0.48  # =0.48 led to freeze when importing elektronn3.data
@@ -77,10 +78,10 @@ dependencies:
 
   # Required dependencies that are not yet available via conda:
   - pip:
-    - open3d<=0.9
+    - open3d
     - zmesh
     - plyfile
-    - torch_geometric == 2.3.1
+    - torch_geometric == 2.0.2
     # Pre-release packages
     - git+https://github.com/mpinb/elektronn3.git@syconn2-mod#egg=elektronn3
     - git+https://github.com/mpinb/knossos_utils.git@syconn2-mod#egg=knossos_utils
@@ -97,4 +98,3 @@ dependencies:
 
     #for skeletonisation
     - fill-voids
-
