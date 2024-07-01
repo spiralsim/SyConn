@@ -17,7 +17,7 @@ Installation
 ------------
 
 - linux-64 or equivalent OS (ex. WSL)
-   - This is required because the dependency `menpo::osmesa <https://anaconda.org/menpo/osmesa>` is currently only available on linux-64.
+   - This is required because the dependency `menpo::osmesa <https://anaconda.org/menpo/osmesa>`__ is currently only available on linux-64.
    - Tested on Ubuntu 22.04.3 LTS
 
 Before you can set up SyConn, ensure that the latest version of the conda package manager is installed on your system.
@@ -26,7 +26,7 @@ Before you can set up SyConn, ensure that the latest version of the conda packag
 You may also need to install g++:
 
 ::
-   
+
    sudo apt-get install g++
 
 Then you can install SyConn and all of its dependencies into a new conda
