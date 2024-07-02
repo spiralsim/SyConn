@@ -202,8 +202,9 @@ def join_chunky_inference_thread(args):
     offset = args[5]
     batch_size = args[6]
     kd_raw.initialize_from_knossos_path(args[7])
+    gpu = args[8]
     join_chunky_inference(cset, config_path, param_path, names, labels, offset,
-                          batch_size, kd=kd_raw)
+                          batch_size, kd=kd_raw, gpu=gpu)
 
 
 def join_chunky_inference(cset, config_path, param_path, names,
@@ -289,7 +290,7 @@ def join_chunky_inference(cset, config_path, param_path, names,
                 os.makedirs(chunk.folder)
 
             if not cnn:
-                if not gpu:
+                if gpu is None:
                     gpu = trainutils.get_free_gpu(wait=0)
                     while gpu == -1:
                         time.sleep(120)
