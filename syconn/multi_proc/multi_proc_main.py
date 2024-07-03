@@ -234,6 +234,8 @@ def SUBP_script(params, name, suffix="", delay=0):
             for param in params[ii]:
                 pkl.dump(param, f)
 
+        print __file__, 'Popen', "%s %s %s %s" % (python_path, path_to_script,
+                                              this_storage_path, this_out_path)
         p = subprocess.Popen("%s %s %s %s" % (python_path, path_to_script,
                                               this_storage_path, this_out_path),
                              shell=True)
@@ -242,7 +244,7 @@ def SUBP_script(params, name, suffix="", delay=0):
 
     for p in processes:
         p.wait()
-
+    print __file__, 'path_to_out', path_to_out
     return path_to_out
 
 

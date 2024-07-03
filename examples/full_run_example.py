@@ -144,6 +144,7 @@ for path in mutex_paths:
 offset = [120, 120, 30]
 
 # Synaptic junctions, vesicle clouds, mitochondria - stage 1
+print __file__, '147 cnn - sj vc mi stage 1'
 params = []
 for gpu in gpus:
     params.append([cset,
@@ -155,6 +156,7 @@ for gpu in gpus:
 mpm.SUBP_script(params, "join_chunky_inference")
 
 # Synaptic junctions, vesicle clouds, mitochondria - stage 2
+print __file__, '159 cnn - sj vc mi stage 2'
 params = []
 for gpu in gpus:
     params.append([cset,
@@ -166,6 +168,7 @@ for gpu in gpus:
 mpm.SUBP_script(params, "join_chunky_inference")
 
 # Type of synaptic junctions
+print __file__, '171 cnn - sj type'
 params = []
 for gpu in gpus:
     params.append([cset,
@@ -177,6 +180,7 @@ for gpu in gpus:
 mpm.SUBP_script(params, "join_chunky_inference")
 
 # Barrier - stage 1
+print __file__, '183 cnn - barrier stage 1'
 params = []
 for gpu in gpus:
     params.append([cset,
@@ -188,6 +192,7 @@ for gpu in gpus:
 mpm.SUBP_script(params, "join_chunky_inference")
 
 # Barrier - stage 2
+print __file__, '195 cnn - barrier stage 2'
 params = []
 for gpu in gpus:
     params.append([cset,
@@ -199,28 +204,32 @@ for gpu in gpus:
 mpm.SUBP_script(params, "join_chunky_inference")
 
 # ------------------------------------------------ Conversion to knossosdatasets
-
+print __file__, '202 converting to kd'
 kd_bar = knossosdataset.KnossosDataset()
+print __file__, '204 rbarrier path:', main_path + "knossosdatasets/rrbarrier/"
 if os.path.exists(main_path + "knossosdatasets/rrbarrier/"):
+    print __file__, '205 knossosdatasets/rrbarrier/ exists'
     kd_bar.initialize_from_knossos_path(main_path + "/knossosdatasets/rrbarrier/")
 else:
+    print __file__, '208 knossosdatasets/rrbarrier/ does not exist'
     bar = cset.from_chunky_to_matrix(kd_raw.boundary, [0, 0, 0], "RBARRIER",
                                      ["bar"], dtype=np.uint8,
                                      show_progress=True)["bar"]
+    print __file__, '213 init_from_mtrx'
     kd_bar.initialize_from_matrix(main_path + "knossosdatasets/rrbarrier/",
                                   scale=[9, 9, 20],
                                   experiment_name="j0126_dense",
                                   data=bar,
                                   mags=[1, 2, 4, 8])
     bar = None
-
+print __file__, '216 asym/sym'
 kd_asym = knossosdataset.KnossosDataset()
 if os.path.exists(main_path + "knossosdatasets/asymmetric/"):
     kd_asym.initialize_from_knossos_path(main_path + "/knossosdatasets/asymmetric/")
 kd_sym = knossosdataset.KnossosDataset()
 if os.path.exists(main_path + "knossosdatasets/symmetric/"):
     kd_sym.initialize_from_knossos_path(main_path + "/knossosdatasets/symmetric/")
-
+print __file__, '223 initialize'
 if not kd_asym.initialized or not kd_sym.initialized:
     types = cset.from_chunky_to_matrix(kd_raw.boundary, [0, 0, 0], "TYPE",
                                        ["asym", "sym"], dtype=np.uint8,
@@ -243,7 +252,7 @@ if not kd_asym.initialized or not kd_sym.initialized:
         types = None
 
 # ------------------------------------------------------------ Object Extraction
-
+print __file__, '246 object extraction'
 oe.from_probabilities_to_objects(cset, "ARGUS",
                                  ["sj"],
                                  thresholds=[int(4*255/21.)],
@@ -270,14 +279,14 @@ oe.from_probabilities_to_objects(cset, "ARGUS",
                                  qsub_queue=qsub_queue)
 
 # ------------ Create hull and map objects to tracings and classify compartments
-
+print __file__, '273 create hull'
 syconn.enrich_tracings_all(main_path, qsub_pe=qsub_pe, qsub_queue=qsub_queue)
 
 # ---------------------------------- Classify contact sites as synaptic or touch
-
+print __file__, '277 classify contact sites'
 syconn.detect_synapses(main_path, qsub_pe=qsub_pe, qsub_queue=qsub_queue)
 
 # --------------------------------------------------- Create connectivity matrix
-
+print __file__, '281 conn matrix'
 syconn.type_sorted_wiring(main_path)
 
